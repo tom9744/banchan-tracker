@@ -1,0 +1,6 @@
+-- 반찬 마스터 테이블: 이름 템플릿
+CREATE TABLE Banchan (
+    Id TEXT PRIMARY KEY,
+    Name TEXT NOT NULL UNIQUE CHECK (LENGTH(Name) > 0),
+    CreatedAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
