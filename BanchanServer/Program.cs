@@ -1,17 +1,25 @@
+using BanchanServer.Database.ConnectionFactory;
+using BanchanServer.Database.Repositories.Interfaces;
+using BanchanServer.Database.Repositories.SQLite;
+using BanchanServer.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+builder.Services.AddScoped<IDbConnectionFactory, SQLiteConnectionFactory>();
+builder.Services.AddScoped<IBanchanRepository, SQLiteBanchanRepository>();
+builder.Services.AddScoped<BanchanService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.UseSwaggerUi(options => {
+        options.DocumentPath = "/openapi/v1.json";
+    });
 }
 
 app.UseHttpsRedirection();
