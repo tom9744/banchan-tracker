@@ -10,6 +10,7 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<IDbConnectionFactory, SQLiteConnectionFactory>();
 builder.Services.AddScoped<IBanchanRepository, SQLiteBanchanRepository>();
+builder.Services.AddScoped<IBanchanInstanceRepository, SQLiteBanchanInstanceRepository>();
 builder.Services.AddScoped<BanchanService>();
 
 var app = builder.Build();
