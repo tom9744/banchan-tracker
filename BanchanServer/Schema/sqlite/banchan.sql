@@ -4,3 +4,12 @@ CREATE TABLE Banchan (
     Name TEXT NOT NULL UNIQUE CHECK (LENGTH(Name) > 0),
     CreatedAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+-- 반찬 인스턴스 테이블: 실제 만든 반찬
+CREATE TABLE BanchanInstance (
+    Id TEXT PRIMARY KEY,
+    BanchanId TEXT NOT NULL,
+    CreatedAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    Memo TEXT,
+    FOREIGN KEY (BanchanId) REFERENCES Banchan(Id) ON DELETE CASCADE
+);
