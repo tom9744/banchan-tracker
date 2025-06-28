@@ -1,4 +1,5 @@
 using BanchanServer.Database.ConnectionFactory;
+using BanchanServer.Database.Initialization;
 using BanchanServer.Database.Repositories.Interfaces;
 using BanchanServer.Database.Repositories.SQLite;
 using BanchanServer.Services;
@@ -6,6 +7,7 @@ using BanchanServer.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddDatabase();
 builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<IDbConnectionFactory, SQLiteConnectionFactory>();
@@ -23,6 +25,8 @@ if (app.Environment.IsDevelopment())
         options.DocumentPath = "/openapi/v1.json";
     });
 }
+
+app.UseDatabase();
 
 app.UseHttpsRedirection();
 

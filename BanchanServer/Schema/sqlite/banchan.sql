@@ -1,12 +1,12 @@
 -- 반찬 마스터 테이블: 이름 템플릿
-CREATE TABLE Banchan (
+CREATE TABLE IF NOT EXISTS Banchan (
     Id TEXT PRIMARY KEY,
     Name TEXT NOT NULL UNIQUE CHECK (LENGTH(Name) > 0),
     CreatedAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 -- 반찬 인스턴스 테이블: 실제 만든 반찬
-CREATE TABLE BanchanInstance (
+CREATE TABLE IF NOT EXISTS BanchanInstance (
     Id TEXT PRIMARY KEY,
     BanchanId TEXT NOT NULL,
     CreatedAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
