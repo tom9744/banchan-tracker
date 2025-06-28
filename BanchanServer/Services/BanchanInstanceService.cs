@@ -39,7 +39,7 @@ public class BanchanInstanceService(IBanchanRepository banchanRepository, IBanch
 
     public Task<IEnumerable<BanchanInstance>> GetInstances() => _banchanInstanceRepository.GetAllAsync();
 
-    public async Task<BanchanInstance?> UpdateInstanceMemo(string id, string memo)
+    public async Task<BanchanInstance?> UpdateInstanceMemo(string id, string? memo)
     {
         var instance = await _banchanInstanceRepository.GetByIdAsync(id);
 
