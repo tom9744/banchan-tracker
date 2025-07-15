@@ -10,6 +10,17 @@ builder.Services.AddControllers();
 builder.Services.AddDatabase();
 builder.Services.AddOpenApi();
 
+// CORS 설정 추가
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddScoped<IDbConnectionFactory, SQLiteConnectionFactory>();
 builder.Services.AddScoped<IBanchanRepository, SQLiteBanchanRepository>();
 builder.Services.AddScoped<IBanchanInstanceRepository, SQLiteBanchanInstanceRepository>();
@@ -27,6 +38,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseDatabase();
+
+// CORS 미들웨어 추가
+app.UseCors();
 
 app.UseHttpsRedirection();
 
