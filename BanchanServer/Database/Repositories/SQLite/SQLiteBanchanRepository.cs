@@ -34,7 +34,8 @@ public class SQLiteBanchanRepository(IDbConnectionFactory connectionFactory) : I
             {
                 Id = reader.GetString(0),
                 Name = reader.GetString(1),
-                CreatedAt = DateTime.Parse(reader.GetString(2))
+                CreatedAt = DateTime.Parse(reader.GetString(2)),
+                UpdatedAt = DateTime.Parse(reader.GetString(3))
             };
 
             banchans.Add(banchan);
@@ -70,7 +71,8 @@ public class SQLiteBanchanRepository(IDbConnectionFactory connectionFactory) : I
             {
                 Id = reader.GetString(0),
                 Name = reader.GetString(1),
-                CreatedAt = DateTime.Parse(reader.GetString(2))
+                CreatedAt = DateTime.Parse(reader.GetString(2)),
+                UpdatedAt = DateTime.Parse(reader.GetString(3))
             };
         }
         return null;

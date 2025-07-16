@@ -17,8 +17,7 @@ public class BanchanService(IBanchanRepository banchanRepository)
         var banchan = new Banchan 
         {
             Id = Guid.NewGuid().ToString(),
-            Name = name,
-            CreatedAt = DateTime.UtcNow
+            Name = name
         };
 
         await _banchanRepository.AddAsync(banchan);

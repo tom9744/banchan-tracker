@@ -7,6 +7,7 @@ public class BanchanDto
     public required string Id { get; set; }
     public required string Name { get; set; }
     public required DateTime CreatedAt { get; set; }
+    public required DateTime UpdatedAt { get; set; }
 }
 
 public class CreateBanchanDto
