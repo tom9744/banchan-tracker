@@ -24,8 +24,10 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IDbConnectionFactory, SQLiteConnectionFactory>();
 builder.Services.AddScoped<IBanchanRepository, SQLiteBanchanRepository>();
 builder.Services.AddScoped<IBanchanInstanceRepository, SQLiteBanchanInstanceRepository>();
+builder.Services.AddScoped<IBanchanInstanceLogRepository, SQLiteBanchanInstanceLogRepository>();
 builder.Services.AddScoped<BanchanService>();
 builder.Services.AddScoped<BanchanInstanceService>();
+builder.Services.AddScoped<BanchanInstanceLogService>();
 
 var app = builder.Build();
 

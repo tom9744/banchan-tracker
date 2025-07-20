@@ -109,7 +109,7 @@ public class SQLiteBanchanInstanceRepository(IDbConnectionFactory connectionFact
     }
 
     public async Task UpdateAsync(BanchanInstance instance)
-    {
+    {   
         using var conn = _connectionFactory.CreateConnection();
     
         if (conn is not SqliteConnection sqliteConn)
@@ -123,11 +123,17 @@ public class SQLiteBanchanInstanceRepository(IDbConnectionFactory connectionFact
         command.CommandText =
         @"
             UPDATE BanchanInstance 
-            SET Memo = @Memo
+            SET Memo = @Memo,
+                RemainingPortion = @RemainingPortion,
+                UpdatedAt = @UpdatedAt,
+                FinishedAt = @FinishedAt
             WHERE Id = @Id
         ";
         command.Parameters.AddWithValue("@Id", instance.Id);
         command.Parameters.AddWithValue("@Memo", instance.Memo ?? string.Empty);
+        command.Parameters.AddWithValue("@RemainingPortion", instance.RemainingPortion);
+        command.Parameters.AddWithValue("@UpdatedAt", instance.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss"));
+        command.Parameters.AddWithValue("@FinishedAt", instance.FinishedAt.HasValue ? instance.FinishedAt.Value.ToString("yyyy-MM-dd HH:mm:ss") : DBNull.Value);
 
         await command.ExecuteNonQueryAsync();
     }

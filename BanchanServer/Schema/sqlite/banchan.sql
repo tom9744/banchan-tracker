@@ -17,3 +17,29 @@ CREATE TABLE IF NOT EXISTS BanchanInstance (
     Memo TEXT,
     FOREIGN KEY (BanchanId) REFERENCES Banchan(Id) ON DELETE CASCADE
 );
+
+-- 반찬 인스턴스 로그 테이블
+CREATE TABLE IF NOT EXISTS BanchanInstanceLog (
+    Id TEXT PRIMARY KEY,
+    BanchanInstanceId TEXT NOT NULL,
+    Type TEXT NOT NULL CHECK (Type IN ('Consumption', 'Disposal')),
+    DetailJson TEXT NOT NULL,
+    LoggedAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (BanchanInstanceId) REFERENCES BanchanInstance(Id) ON DELETE CASCADE
+);
+
+-- 반찬 인스턴스 로그 테이블 트리거
+CREATE TRIGGER IF NOT EXISTS prevent_multiple_discarded_logs
+BEFORE INSERT ON BanchanInstanceLog
+WHEN NEW.Type = 'Disposal'
+BEGIN
+  SELECT
+    CASE
+      WHEN EXISTS (
+        SELECT 1 FROM BanchanInstanceLog
+        WHERE BanchanInstanceId = NEW.BanchanInstanceId
+          AND Type = 'Disposal'
+      )
+      THEN RAISE(ABORT, 'Disposal log already exists for this BanchanInstance')
+    END;
+END;
