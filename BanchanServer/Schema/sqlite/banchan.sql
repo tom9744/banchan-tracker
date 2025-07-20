@@ -11,6 +11,9 @@ CREATE TABLE IF NOT EXISTS BanchanInstance (
     Id TEXT PRIMARY KEY,
     BanchanId TEXT NOT NULL,
     CreatedAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FinishedAt TEXT,
+    RemainingPortion REAL NOT NULL DEFAULT 1 CHECK (RemainingPortion >= 0 AND RemainingPortion <= 1),
     Memo TEXT,
     FOREIGN KEY (BanchanId) REFERENCES Banchan(Id) ON DELETE CASCADE
 );

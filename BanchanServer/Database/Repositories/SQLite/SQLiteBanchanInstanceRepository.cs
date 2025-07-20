@@ -34,7 +34,10 @@ public class SQLiteBanchanInstanceRepository(IDbConnectionFactory connectionFact
                 Id = reader.GetString(0),
                 BanchanId = reader.GetString(1),
                 CreatedAt = DateTime.Parse(reader.GetString(2)),
-                Memo = reader.GetString(3)
+                UpdatedAt = DateTime.Parse(reader.GetString(3)),
+                FinishedAt = reader.IsDBNull(4) ? null : DateTime.Parse(reader.GetString(4)),
+                RemainingPortion = reader.GetDouble(5),
+                Memo = reader.IsDBNull(6) ? null : reader.GetString(6)
             };
 
             instances.Add(instance);
@@ -69,9 +72,12 @@ public class SQLiteBanchanInstanceRepository(IDbConnectionFactory connectionFact
             return new BanchanInstance
             {
                 Id = reader.GetString(0),
-                BanchanId = reader.GetString(1),
+                BanchanId = reader.GetString(1),    
                 CreatedAt = DateTime.Parse(reader.GetString(2)),
-                Memo = reader.GetString(3)
+                UpdatedAt = DateTime.Parse(reader.GetString(3)),
+                FinishedAt = reader.IsDBNull(4) ? null : DateTime.Parse(reader.GetString(4)),
+                RemainingPortion = reader.GetDouble(5),
+                Memo = reader.IsDBNull(6) ? null : reader.GetString(6)
             };
         }
         return null;

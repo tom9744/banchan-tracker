@@ -6,8 +6,10 @@ public class BanchanInstanceDto
 {
     public required string Id { get; set; }
     public required string BanchanId { get; set; }
-    public string? Memo { get; set; }
+    public required double RemainingPortion { get; set; }
+    public required string? Memo { get; set; }
     public required DateTime CreatedAt { get; set; }
+    public required DateTime? FinishedAt { get; set; }
 }
 
 public class CreateBanchanInstanceDto

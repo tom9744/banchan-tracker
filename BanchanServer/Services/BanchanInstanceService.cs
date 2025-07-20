@@ -26,8 +26,7 @@ public class BanchanInstanceService(IBanchanRepository banchanRepository, IBanch
         {
             Id = Guid.NewGuid().ToString(),
             BanchanId = banchanId,
-            CreatedAt = DateTime.UtcNow,
-            Memo = memo ?? string.Empty
+            Memo = memo
         };
 
         await _banchanInstanceRepository.AddAsync(instance);
